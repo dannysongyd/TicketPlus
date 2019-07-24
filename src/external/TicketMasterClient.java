@@ -45,7 +45,10 @@ public class TicketMasterClient {
             e.printStackTrace();
         }
 
-        String query = String.format("apikey=%s&latlong=%s,%s&keyword=%s&radius=%s", API_KEY, lat, lon, keyword, 50);
+
+
+        String geoHash = GeoHash.encodeGeohash(lat, lon, 8);
+        String query = String.format("apikey=%s&geoPoint=%s&keyword=%s&radius=%s", API_KEY, geoHash, keyword, 50);
         String url = HOST + ENDPOINT + "?" + query;
 
         StringBuilder responseBody = new StringBuilder();
