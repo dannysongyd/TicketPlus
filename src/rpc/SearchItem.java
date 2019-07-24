@@ -32,7 +32,7 @@ public class SearchItem extends HttpServlet {
 
         TicketMasterClient client = new TicketMasterClient();
 
-        RpcHelper.writeJsonArray(response, client.search(lat, lon, null));
+//        RpcHelper.writeJsonArray(response, client.search(lat, lon, null));
 
     }
 
