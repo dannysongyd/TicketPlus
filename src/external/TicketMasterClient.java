@@ -70,6 +70,7 @@ public class TicketMasterClient {
             System.out.println("Response code:" + responseCode);
 
             if (responseCode != 200) {
+                System.out.println("responseCode: "+responseCode);
                 return new ArrayList<>();
             }
 
