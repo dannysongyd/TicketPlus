@@ -58,7 +58,7 @@ public interface DBConnection {
      * @param userIdf
      * @param lat
      * @param lon
-     * @param term   (Nullable)
+     * @param term    (Nullable)
      * @return list of items
      */
     public List<Item> searchItems(double lat, double lon, String term);
@@ -88,4 +88,19 @@ public interface DBConnection {
      * @return boolean
      */
     public boolean verifyLogin(String userId, String password);
+
+    /**
+     * Register one user
+     *
+     * @param userId
+     * @param password
+     * @param firstname
+     * @param lastname
+     * @return boolean
+     */
+    public boolean registerUser(String userId, String password, String firstname, String lastname);
+
 }
+
+
+

@@ -5,6 +5,7 @@ import db.DBConnection;
 import db.DBConnectionFactory;
 import entity.Item;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 
 /*
@@ -41,6 +43,7 @@ public class SearchItem extends HttpServlet {
         String userId = session.getAttribute("user_id").toString();
 
 
+
         response.setContentType("application/json");
 
         double lat = Double.parseDouble(request.getParameter("lat"));
@@ -52,10 +55,14 @@ public class SearchItem extends HttpServlet {
 
         try {
             List<Item> items = connection.searchItems(lat, lon, term);
+            Set<String> favoritedItemIds = connection.getFavoriteItemIds(userId);
+
 
             JSONArray array = new JSONArray();
             for (Item item : items) {
-                array.put(item.toJSONObject());
+                JSONObject obj = item.toJSONObject();
+                obj.put("favorite", favoritedItemIds.contains(item.getItemId()));
+                array.put(obj);
             }
             RpcHelper.writeJsonArray(response, array);
 
